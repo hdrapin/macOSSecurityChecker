@@ -1,6 +1,6 @@
 # macOS Security Checker
 
-A command-line tool for checking various security parameters and configurations on macOS systems.
+A command-line (tool) swift script for checking various security parameters and configurations on macOS systems.
 
 ## Overview
 
