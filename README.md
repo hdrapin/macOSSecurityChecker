@@ -37,22 +37,62 @@ The tool checks and reports on the following security parameters:
 ## Requirements
 
 - macOS 11.0 or later
-- Administrative privileges for certain checks
+- Administrative privileges
+- Swift runtime environment
 
-## Installation
+## Status Definitions
 
-1. Clone this repository: 
-git clone [repository-url]
+- **Active**: Feature is enabled and functioning
+- **Inactive**: Feature is disabled
+- **Found/Not Found**: Component presence status
+- **Yes/No**: Boolean setting state
+- **On/Off**: Feature enablement status
 
+## Important Security Notes
 
+1. **FileVault**: Should be "On" for disk encryption
+2. **SIP**: Should be "Active" for system file protection
+3. **Secure Boot**: Should be "Active" for startup security
+4. **Gatekeeper**: Should be "Active" for application security
+
+## Troubleshooting
+
+If the script fails to run:
+1. Verify execution permissions:
+   ```bash
+   chmod +x macsec.swift
+   ```
+2. Ensure administrative privileges:
+   ```bash
+   sudo ./macsec.swift
+   ```
+3. Check system compatibility:
+   ```bash
+   sw_vers
+   ```
+
+## Known Limitations
+
+- Administrative privileges required
+- Some features may be hardware-dependent
+- Results vary by macOS version
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
 
 ## License
 
+[Your chosen license]
 
 ## Disclaimer
 
-This tool is provided as-is, without any warranties. Always verify critical security settings through official Apple tools and documentation.
+This tool is provided as-is. Always verify critical security settings through official Apple tools and documentation.
+
+## Support
+
+For issues and feature requests, please create an issue in the repository.
