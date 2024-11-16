@@ -85,10 +85,6 @@ If the script fails to run:
 4. Push to the branch
 5. Create a Pull Request
 
-## License
-
-[Your chosen license]
-
 ## Disclaimer
 
 This tool is provided as-is. Always verify critical security settings through official Apple tools and documentation.
