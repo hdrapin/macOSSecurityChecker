@@ -166,6 +166,7 @@ macos-security-checker --help
 ## 📖 Usage
 
 ### Basic Commands
+
 ```bash
 # Default text output (English)
 ./macOSSecurityChecker.release.swift
@@ -176,12 +177,17 @@ macos-security-checker --help
 # Verbose mode with detailed information
 ./macOSSecurityChecker.release.swift --verbose
 
+# Combine options (now fully working!)
+./macOSSecurityChecker.release.swift --lang fr --verbose
+
 # Help and options
 ./macOSSecurityChecker.release.swift --help
 
 # Show version
 ./macOSSecurityChecker.release.swift --version
 ```
+
+**✨ NEW:** All command-line options now work together! Combine `--lang fr` with `--verbose`, `--json`, etc.
 
 ### Output Formats
 ```bash
@@ -193,7 +199,21 @@ macos-security-checker --help
 
 # Pipe to file while displaying
 ./macOSSecurityChecker.release.swift | tee audit.txt
+
+# Combine language with output format
+./macOSSecurityChecker.release.swift --lang fr --json > audit_fr.json
 ```
+
+### Available Options
+
+| Option | Description | Example |
+|--------|-------------|---------|
+| `--help` | Show help message | `./macOSSecurityChecker.release.swift --help` |
+| `--version` | Show version information | `./macOSSecurityChecker.release.swift --version` |
+| `--lang LANG` | Set language (en, fr) | `./macOSSecurityChecker.release.swift --lang fr` |
+| `--verbose` | Show detailed explanations | `./macOSSecurityChecker.release.swift --verbose` |
+| `--json` | JSON output format | `./macOSSecurityChecker.release.swift --json` |
+| `--csv` | CSV output format | `./macOSSecurityChecker.release.swift --csv` |
 
 ### Language Options
 ```bash
