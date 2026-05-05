@@ -35,7 +35,7 @@ class TerminalColors {
 }
 
 // MARK: - Enhanced Security Check Structure
-struct EnhancedSecurityCheck {
+struct EnhancedSecurityCheck: Codable {
     // System Information (5)
     let macModel: String
     let osVersion: String
