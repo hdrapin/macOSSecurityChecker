@@ -5,14 +5,22 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Swift](https://img.shields.io/badge/Swift-5.5%2B-orange.svg)](https://www.swift.org)
 [![macOS](https://img.shields.io/badge/macOS-11.0%2B-green.svg)](https://www.apple.com/macos)
-[![Version](https://img.shields.io/badge/Version-2.0.0-brightgreen.svg)](https://github.com/hdrapin/macOSSecurityChecker/releases)
+[![Version](https://img.shields.io/badge/Version-2.0.1-brightgreen.svg)](https://github.com/hdrapin/macOSSecurityChecker/releases/tag/v2.0.1)
+
+---
+
+## ⚠️ Important: Version Information
+
+**Current Version: v2.0.1** with 88 comprehensive security checks and multilingual support.
+
+> **Note:** If you downloaded an older version (before May 2026) or see only 4-7 checks instead of 88, please update to v2.0.1 using one of the methods below. The older version is incomplete.
 
 ---
 
 ## 🎯 Quick Start
 
 ```bash
-# Clone and run
+# Clone the latest version (RECOMMENDED)
 git clone https://github.com/hdrapin/macOSSecurityChecker.git
 cd macOSSecurityChecker
 
@@ -82,17 +90,46 @@ Organized in **9 categories**:
 
 ## 📦 Installation Methods
 
-### Method 1: Direct Execution (Recommended for Quick Audits)
+### Method 1: One-Command Installation (Fastest ⚡)
+
+**Ultra-fast 30-second installation** with curl - perfect for first-time users:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hdrapin/macOSSecurityChecker/main/quick-install.sh | bash
+macos-security-checker
+```
+
+Or with interactive options to choose between script/binary:
+```bash
+curl -fsSL https://raw.githubusercontent.com/hdrapin/macOSSecurityChecker/main/install.sh | bash
+```
+
+✅ Installs to `/usr/local/bin` for system-wide access  
+✅ Automatic macOS compatibility check  
+✅ Ready to use immediately  
+📖 [Full installation guide](INSTALLATION_CURL.md)
+
+---
+
+### Method 2: Direct Execution (Recommended for Quick Audits)
+
+⚠️ **IMPORTANT:** Use `macOSSecurityChecker.release.swift` - NOT `macOSSecurityChecker.swift`
+
 ```bash
 chmod +x macOSSecurityChecker.release.swift
 ./macOSSecurityChecker.release.swift
 ```
-- ✓ No compilation needed
-- ✓ Works immediately
-- ✓ Source code visible
+
+Expected output:
+- ✓ 88 security checks (not 4-7)
+- ✓ 9 security categories
+- ✓ Complete detailed report
 - ⏱️ ~5 seconds (includes compilation)
 
-### Method 2: Compiled Binary (Recommended for Production)
+**If you see only 4-7 checks:**
+→ You have an older incomplete version. Clone the latest from GitHub or use curl installation.
+
+### Method 3: Compiled Binary (Recommended for Production)
 ```bash
 ./BUILD_FOR_MACOS.sh          # Compile
 ./build/macOSSecurityChecker  # Run
@@ -105,7 +142,7 @@ macos-security-checker --help
 - ✓ No Swift installation required
 - ✓ Ready-to-distribute binary
 
-### Method 3: From GitHub Releases
+### Method 4: From GitHub Releases
 ```bash
 # Download pre-compiled binary from GitHub
 # https://github.com/hdrapin/macOSSecurityChecker/releases
@@ -115,7 +152,7 @@ chmod +x macOSSecurityChecker-macos-14
 ./macOSSecurityChecker-macos-14
 ```
 
-### Method 4: System-Wide Installation
+### Method 5: System-Wide Installation
 ```bash
 sudo cp macOSSecurityChecker.release.swift /usr/local/bin/macos-security-checker
 sudo chmod +x /usr/local/bin/macos-security-checker
@@ -129,6 +166,7 @@ macos-security-checker --help
 ## 📖 Usage
 
 ### Basic Commands
+
 ```bash
 # Default text output (English)
 ./macOSSecurityChecker.release.swift
@@ -139,12 +177,17 @@ macos-security-checker --help
 # Verbose mode with detailed information
 ./macOSSecurityChecker.release.swift --verbose
 
+# Combine options (now fully working!)
+./macOSSecurityChecker.release.swift --lang fr --verbose
+
 # Help and options
 ./macOSSecurityChecker.release.swift --help
 
 # Show version
 ./macOSSecurityChecker.release.swift --version
 ```
+
+**✨ NEW:** All command-line options now work together! Combine `--lang fr` with `--verbose`, `--json`, etc.
 
 ### Output Formats
 ```bash
@@ -156,7 +199,21 @@ macos-security-checker --help
 
 # Pipe to file while displaying
 ./macOSSecurityChecker.release.swift | tee audit.txt
+
+# Combine language with output format
+./macOSSecurityChecker.release.swift --lang fr --json > audit_fr.json
 ```
+
+### Available Options
+
+| Option | Description | Example |
+|--------|-------------|---------|
+| `--help` | Show help message | `./macOSSecurityChecker.release.swift --help` |
+| `--version` | Show version information | `./macOSSecurityChecker.release.swift --version` |
+| `--lang LANG` | Set language (en, fr) | `./macOSSecurityChecker.release.swift --lang fr` |
+| `--verbose` | Show detailed explanations | `./macOSSecurityChecker.release.swift --verbose` |
+| `--json` | JSON output format | `./macOSSecurityChecker.release.swift --json` |
+| `--csv` | CSV output format | `./macOSSecurityChecker.release.swift --csv` |
 
 ### Language Options
 ```bash
@@ -477,6 +534,119 @@ Contributions welcome! Please:
 
 ---
 
+## 🔧 Troubleshooting
+
+### Problem: Script shows error "expected a macro identifier for a pound literal expression"
+
+**Cause:** You're running an old version of the script (macOSSecurityChecker.swift) instead of the new version.
+
+**Solution:**
+```bash
+# Make sure you're using the correct file:
+./macOSSecurityChecker.release.swift
+
+# NOT:
+./macOSSecurityChecker.swift
+```
+
+### Problem: Only 4-7 checks instead of 88
+
+**Cause:** You have an incomplete or outdated version of the script.
+
+**Solution:**
+```bash
+# Update to the latest version
+git clone https://github.com/hdrapin/macOSSecurityChecker.git
+cd macOSSecurityChecker
+./macOSSecurityChecker.release.swift
+
+# Or use curl installation
+curl -fsSL https://raw.githubusercontent.com/hdrapin/macOSSecurityChecker/main/quick-install.sh | bash
+macos-security-checker
+```
+
+### Problem: "Permission denied" when running the script
+
+**Solution:**
+```bash
+# Make the script executable
+chmod +x macOSSecurityChecker.release.swift
+
+# Then run it
+./macOSSecurityChecker.release.swift
+```
+
+### Problem: Some checks show "Unknown" or "N/A"
+
+**Cause:** The tool is running without admin privileges.
+
+**Solution:**
+```bash
+# Run with sudo for complete results
+sudo ./macOSSecurityChecker.release.swift
+
+# Or use with admin account
+sudo -u administrator ./macOSSecurityChecker.release.swift
+```
+
+### Problem: Command not found after curl installation
+
+**Solution:**
+```bash
+# Refresh your shell session
+source ~/.zprofile
+# or
+source ~/.bash_profile
+
+# Then try again
+macos-security-checker
+```
+
+### Problem: Can't execute script with Swift directly
+
+**Solution - Try one of these methods:**
+
+```bash
+# Method 1: Use swift interpreter
+swift ./macOSSecurityChecker.release.swift
+
+# Method 2: Compile to binary first
+./BUILD_FOR_MACOS.sh
+./build/macOSSecurityChecker
+
+# Method 3: Copy to system path
+sudo cp macOSSecurityChecker.release.swift /usr/local/bin/macos-security-checker
+sudo chmod +x /usr/local/bin/macos-security-checker
+macos-security-checker
+```
+
+### Getting Help
+
+If you encounter other issues:
+
+1. **Check the version:**
+   ```bash
+   ./macOSSecurityChecker.release.swift --version
+   ```
+   Should show v2.0.1 or later.
+
+2. **Enable verbose output:**
+   ```bash
+   ./macOSSecurityChecker.release.swift --verbose
+   ```
+
+3. **Export results for analysis:**
+   ```bash
+   ./macOSSecurityChecker.release.swift --json > results.json
+   ```
+
+4. **Check documentation:**
+   - [Installation Guide](INSTALLATION_CURL.md)
+   - [Complete Documentation](README_DETAILED.md)
+   - [FAQ](FAQ_DISTRIBUTION.md)
+
+---
+
 ## 📞 Support & Feedback
 
 - **Issues:** [GitHub Issues](https://github.com/hdrapin/macOSSecurityChecker/issues)
@@ -504,10 +674,11 @@ See [LICENSE](LICENSE) file for details.
 
 ---
 
-**Last Updated:** May 2024  
-**Version:** 2.0.0  
+**Last Updated:** May 2026  
+**Version:** 2.0.1  
 **Status:** Production Ready ✓  
-**Downloads:** [GitHub Releases](https://github.com/hdrapin/macOSSecurityChecker/releases)
+**Downloads:** [GitHub Releases](https://github.com/hdrapin/macOSSecurityChecker/releases)  
+**Support:** [Issues](https://github.com/hdrapin/macOSSecurityChecker/issues) | [Discussions](https://github.com/hdrapin/macOSSecurityChecker/discussions)
 
 ---
 
