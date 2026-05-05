@@ -1,0 +1,104 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        include:
+          - os: macos-12
+            name: "macOS 12 (Monterey)"
+          - os: macos-13
+            name: "macOS 13 (Ventura)"
+          - os: macos-14
+            name: "macOS 14 (Sonoma)"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Swift version
+        run: swift --version
+
+      - name: Compile binary for ${{ matrix.name }}
+        run: |
+          mkdir -p build
+          swiftc -O -o build/macOSSecurityChecker-${{ matrix.os }} macOSSecurityChecker.release.swift
+          chmod +x build/macOSSecurityChecker-${{ matrix.os }}
+
+      - name: Create executable package
+        run: |
+          cd build
+          tar -czf macOSSecurityChecker-${{ matrix.os }}.tar.gz macOSSecurityChecker-${{ matrix.os }}
+          ls -lh *.tar.gz
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: binaries-${{ matrix.os }}
+          path: build/macOSSecurityChecker-${{ matrix.os }}.tar.gz
+
+  create-release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/')
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            binaries-*/macOSSecurityChecker-*.tar.gz
+          body: |
+            # macOS Security Checker Release
+
+            ## Changes
+            See CHANGELOG.md for details.
+
+            ## Installation
+
+            ### Option 1: Direct Script (No compilation needed)
+            ```bash
+            ./macOSSecurityChecker.release.swift
+            ```
+
+            ### Option 2: Use Compiled Binary
+            ```bash
+            # Extract the appropriate binary for your macOS version
+            tar -xzf macOSSecurityChecker-macos-XX.tar.gz
+            chmod +x macOSSecurityChecker-macos-XX
+            ./macOSSecurityChecker-macos-XX
+            ```
+
+            ### Option 3: System-wide Installation
+            ```bash
+            sudo cp macOSSecurityChecker.release.swift /usr/local/bin/macos-security-checker
+            sudo chmod +x /usr/local/bin/macos-security-checker
+            macos-security-checker --help
+            ```
+
+            ## Supported macOS Versions
+            - macOS 11 (Big Sur)
+            - macOS 12 (Monterey)
+            - macOS 13 (Ventura)
+            - macOS 14 (Sonoma)
+            - macOS 15 (Sequoia)
+            - macOS 16 (Tahoe)
+
+            ## Documentation
+            - See [README_DETAILED.md](README_DETAILED.md) for complete documentation
+            - See [INSTALL_FOR_MACOS.md](INSTALL_FOR_MACOS.md) for installation guide
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
