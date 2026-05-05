@@ -419,8 +419,6 @@ func printComprehensiveReport(_ check: EnhancedSecurityCheck) {
 }
 
 func printHeader(_ check: EnhancedSecurityCheck) {
-    let colors = TerminalColors.supportsColors
-
     print("┌" + String(repeating: "─", count: 75) + "┐")
     print("│" + center("🔒 macOS SECURITY AUDIT REPORT v\(VERSION) 🔒", width: 75) + "│")
     print("│" + center("", width: 75) + "│")
@@ -619,7 +617,7 @@ func printFooter() {
 
 func getStatusSymbol(_ status: Bool) -> String {
     if TerminalColors.supportsColors {
-        return status ? TerminalColors.colorize("✓", color: TerminalColors.green) : TerminalColors.colorize("✗", color: TerminalColors.red)
+        return status ? (TerminalColors.green + "✓" + TerminalColors.reset) : (TerminalColors.red + "✗" + TerminalColors.reset)
     }
     return status ? "✓" : "✗"
 }
