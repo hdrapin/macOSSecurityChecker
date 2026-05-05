@@ -82,7 +82,28 @@ Organized in **9 categories**:
 
 ## 📦 Installation Methods
 
-### Method 1: Direct Execution (Recommended for Quick Audits)
+### Method 1: One-Command Installation (Fastest ⚡)
+
+**Ultra-fast 30-second installation** with curl - perfect for first-time users:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/hdrapin/macOSSecurityChecker/main/quick-install.sh | bash
+macos-security-checker
+```
+
+Or with interactive options to choose between script/binary:
+```bash
+curl -fsSL https://raw.githubusercontent.com/hdrapin/macOSSecurityChecker/main/install.sh | bash
+```
+
+✅ Installs to `/usr/local/bin` for system-wide access  
+✅ Automatic macOS compatibility check  
+✅ Ready to use immediately  
+📖 [Full installation guide](INSTALLATION_CURL.md)
+
+---
+
+### Method 2: Direct Execution (Recommended for Quick Audits)
 ```bash
 chmod +x macOSSecurityChecker.release.swift
 ./macOSSecurityChecker.release.swift
@@ -92,7 +113,7 @@ chmod +x macOSSecurityChecker.release.swift
 - ✓ Source code visible
 - ⏱️ ~5 seconds (includes compilation)
 
-### Method 2: Compiled Binary (Recommended for Production)
+### Method 3: Compiled Binary (Recommended for Production)
 ```bash
 ./BUILD_FOR_MACOS.sh          # Compile
 ./build/macOSSecurityChecker  # Run
@@ -105,7 +126,7 @@ macos-security-checker --help
 - ✓ No Swift installation required
 - ✓ Ready-to-distribute binary
 
-### Method 3: From GitHub Releases
+### Method 4: From GitHub Releases
 ```bash
 # Download pre-compiled binary from GitHub
 # https://github.com/hdrapin/macOSSecurityChecker/releases
@@ -115,7 +136,7 @@ chmod +x macOSSecurityChecker-macos-14
 ./macOSSecurityChecker-macos-14
 ```
 
-### Method 4: System-Wide Installation
+### Method 5: System-Wide Installation
 ```bash
 sudo cp macOSSecurityChecker.release.swift /usr/local/bin/macos-security-checker
 sudo chmod +x /usr/local/bin/macos-security-checker
