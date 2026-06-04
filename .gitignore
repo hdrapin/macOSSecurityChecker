@@ -1,0 +1,19 @@
+venv/
+__pycache__/
+*.pyc
+News/
+Logs/
+Cache/
+LaunchAgent.log
+
+# Apple News Scraper
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+Cache/
+News/
+Logs/
+*.log
+LaunchAgent.log
