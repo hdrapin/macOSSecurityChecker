@@ -1,0 +1,218 @@
+═══════════════════════════════════════════════════════════════════════════════
+🏠 HOMEY PRO - FLOWS DE SÉCURITÉ MACOS
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ STATUS: 5 FLOWS CRÉÉS ET ACTIFS
+
+───────────────────────────────────────────────────────────────────────────────
+FLOWS DISPONIBLES
+───────────────────────────────────────────────────────────────────────────────
+
+1️⃣  🟢 SÉCURITÉ EXCELLENTE (Score 9-10)
+    ID: ce6c9cc2-d93d-4e2f-be67-48729272fa0e
+    Actions: Notification + Lumière Salon
+    Message: ✅ SÉCURITÉ MACOS EXCELLENTE! 🎉 Score: 9-10/10
+
+2️⃣  🟡 SÉCURITÉ BONNE (Score 7-9)
+    ID: c03e3b80-ce09-4e1c-a332-652230c8e135
+    Actions: Notification simple
+    Message: ✅ Sécurité macOS BONNE - Bon niveau de protection
+
+3️⃣  🟠 ATTENTION (Score 5-7)
+    ID: 81c2617f-640b-4b67-bb9b-44d2fd4803c3
+    Actions: Notification + Lumière Petit Salon
+    Message: ⚠️ ALERTE SÉCURITÉ MACOS - Protection insuffisante
+
+4️⃣  🔴 CRITIQUE (Score < 5)
+    ID: 832a8e34-a856-412f-826b-c15da3f5fcee
+    Actions: Push + Lumière Entrée + Notification Système
+    Message: 🚨 ALERTE CRITIQUE - Risque de sécurité majeur!
+
+5️⃣  🔄 VÉRIFICATION QUOTIDIENNE
+    ID: 928b250e-ddc3-4ca7-8efb-771133a36122
+    Actions: Rapport quotidien
+    Message: 📊 Scan sécurité macOS effectué - Consultez le rapport
+
+───────────────────────────────────────────────────────────────────────────────
+HOMEY INSTANCE
+───────────────────────────────────────────────────────────────────────────────
+
+Name:    Homey Pro
+ID:      664354c5793f18df3856475e
+Status:  🟢 Active
+Devices: 131 connectés
+
+Devices avec actions intégrées:
+- 🏠 Salon (Lumière)
+- 🏠 Petit Salon (Lumière)
+- 🚪 Entrée (Lumière)
+- 📱 Notifications push
+- 🔔 Notifications système
+
+───────────────────────────────────────────────────────────────────────────────
+FICHIERS CRÉÉS
+───────────────────────────────────────────────────────────────────────────────
+
+✅ HomeyIntegration.swift
+   Module Swift pour gérer les flows Homey
+   - Classe HomeyFlowManager
+   - Détermination du niveau de sécurité
+   - Déclenchement des flows
+
+✅ macOSSecurityChecker-Homey.swift
+   Script complet avec sécurité checker + Homey
+   Usage: ./macOSSecurityChecker-Homey.swift --homey
+
+✅ setup-homey.sh
+   Script d'installation automatique
+   - Crée les liens système
+   - Configure l'automation quotidienne
+   - Teste l'intégration
+
+✅ HOMEY_INTEGRATION.md
+   Documentation complète (EN/FR)
+   - Installation
+   - Utilisation
+   - Déclenchement automatique
+   - Dépannage
+
+✅ HOMEY_FLOWS_SUMMARY.txt
+   Ce fichier - résumé rapide
+
+───────────────────────────────────────────────────────────────────────────────
+COMMENT UTILISER
+───────────────────────────────────────────────────────────────────────────────
+
+1. DÉCLENCHER MANUELLEMENT (depuis Homey):
+   ┌─────────────────────────────────────┐
+   │ App Homey → Automations             │
+   │ → Sélectionner un flow              │
+   │ → Cliquer ▶️ (Play)                  │
+   └─────────────────────────────────────┘
+
+2. AUTOMATIQUE (quotidien à 9h):
+   ┌─────────────────────────────────────┐
+   │ chmod +x setup-homey.sh             │
+   │ ./setup-homey.sh                    │
+   │ → Choisir option 1 (Cron) ou 2 (LaunchAgent)
+   └─────────────────────────────────────┘
+
+3. VIA LE SECURITY CHECKER:
+   ┌─────────────────────────────────────┐
+   │ ./macOSSecurityChecker.release.swift│
+   │ ./macOSSecurityChecker-Homey.swift --homey
+   │ → Voir quel flow déclencher         │
+   └─────────────────────────────────────┘
+
+───────────────────────────────────────────────────────────────────────────────
+ACTIVATION RAPIDE
+───────────────────────────────────────────────────────────────────────────────
+
+Étape 1: Rendre executable
+  chmod +x macOSSecurityChecker-Homey.swift
+
+Étape 2: Tester
+  ./macOSSecurityChecker-Homey.swift --homey
+
+Étape 3: Voir les flows dans Homey
+  App Homey → Automations → Chercher "Sécurité"
+
+Étape 4: Déclencher manuellement pour tester
+  Cliquer ▶️ sur un flow
+
+───────────────────────────────────────────────────────────────────────────────
+ARCHITECTURE
+───────────────────────────────────────────────────────────────────────────────
+
+┌─────────────────────────────────────────────────────────────┐
+│ macOS Security Checker (v2.0.0)                            │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│ ┌──────────────────────────────────────────────────────┐   │
+│ │ 88 Sécurité Checks                                   │   │
+│ │ • Système (5)     • Réseau (9)     • Comptes (6)    │   │
+│ │ • Confidentialité (9) • iCloud (8) • Chiffrement (9)│   │
+│ │ • Mises à jour (5) • Avancé (6)                      │   │
+│ └──────────────────────────────────────────────────────┘   │
+│                            ↓                                │
+│ ┌──────────────────────────────────────────────────────┐   │
+│ │ Score Sécurité: 0-10                                 │   │
+│ │ Détermine le niveau (Excellent/Bon/Attention/Critique)
+│ └──────────────────────────────────────────────────────┘   │
+│                            ↓                                │
+│ ┌──────────────────────────────────────────────────────┐   │
+│ │ Homey Integration Module                             │   │
+│ │ • Sélectionne le flow approprié                      │   │
+│ │ • Déclenche via API MCP                              │   │
+│ └──────────────────────────────────────────────────────┘   │
+│                            ↓                                │
+│ ┌──────────────────────────────────────────────────────┐   │
+│ │ Homey Pro (5 Flows)                                  │   │
+│ │ 🟢 Excellent → Notification + Salon                  │   │
+│ │ 🟡 Bon → Notification                                │   │
+│ │ 🟠 Attention → Notification + Petit Salon            │   │
+│ │ 🔴 Critique → Push + Entrée + Alarme                 │   │
+│ │ 🔄 Quotidien → Rapport                               │   │
+│ └──────────────────────────────────────────────────────┘   │
+│                            ↓                                │
+│ ┌──────────────────────────────────────────────────────┐   │
+│ │ Actions Homey                                        │   │
+│ │ 📱 Notifications mobile                              │   │
+│ │ 💡 Contrôle lumières                                 │   │
+│ │ 🔔 Alertes système                                   │   │
+│ │ 🏠 Intégration maison intelligente                    │   │
+│ └──────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
+
+───────────────────────────────────────────────────────────────────────────────
+AVANTAGES DE CETTE INTÉGRATION
+───────────────────────────────────────────────────────────────────────────────
+
+✅ NOTIFICATIONS EN TEMPS RÉEL
+   Alertes push instantanées sur votre téléphone
+
+✅ ACTIONS VISUELLES
+   Lumières qui s'allument pour signaler une alerte
+
+✅ CENTRALISATION
+   Toutes les alertes passent par Homey (un seul point d'entrée)
+
+✅ AUTOMATISATION
+   Scan quotidien sans intervention manuelle
+
+✅ INTÉGRATION MAISON
+   Fonctionne avec tous les appareils Homey
+
+✅ PERSONNALISABLE
+   Ajouter des actions (fermer stores, allumer clim, etc.)
+
+───────────────────────────────────────────────────────────────────────────────
+DÉPANNAGE RAPIDE
+───────────────────────────────────────────────────────────────────────────────
+
+❌ Les flows ne se déclenchent pas?
+   → Vérifier dans Homey: Automations → Tous les toggles vert
+   → Redémarrer Homey Pro
+
+❌ Notifications ne s'affichent pas?
+   → Vérifier: Paramètres Téléphone → Notifications → Homey
+   → App Homey connectée (Bluetooth + WiFi)
+
+❌ Script Swift ne fonctionne pas?
+   → chmod +x macOSSecurityChecker-Homey.swift
+   → Vérifier Swift 5.5+ (swift --version)
+   → Voir HOMEY_INTEGRATION.md
+
+───────────────────────────────────────────────────────────────────────────────
+CONTACT & SUPPORT
+───────────────────────────────────────────────────────────────────────────────
+
+Documentation: HOMEY_INTEGRATION.md
+GitHub: https://github.com/hdrapin/macOSSecurityChecker
+Homey Docs: https://developers.homey.app
+
+───────────────────────────────────────────────────────────────────────────────
+Version: 2.0.0
+Date: 9 juin 2026
+Status: ✅ Production Ready
+═══════════════════════════════════════════════════════════════════════════════
